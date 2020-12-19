@@ -1,7 +1,27 @@
-#game div {
+body {
+  text-align: center;
+  padding: 0 10%;
+  background-color: rgb(179, 172, 214);
+}
+
+ #game div {
   border: 1px solid black;
   width: 17%;
-  height: 200px;
-  margin: 10px;
+  height: 150px;
+  margin: 10px 15px;
   display: inline-block;
+  cursor: pointer;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 2px solid green;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.letter {
+  transition: color 1000ms;
+  font-family: 'Montserrat', sans-serif;
 }

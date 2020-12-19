@@ -4,31 +4,27 @@ let card2 = null;
 let cardsFlipped = 0;
 let noClicking = false;
 
-const COLORS = [
-  "red",
-  "blue",
-  "green",
-  "orange",
-  "purple",
-  "red",
-  "blue",
-  "green",
-  "orange",
-  "purple",
+const IMAGES = [
+  "images/cat1.jpg",
+  "images/cat2.jpg",
+  "images/cat3.jpg",
+  "images/cat4.jpg",
+  "images/cat5.jpg",
+  "images/cat6.jpg",
+  "images/cat1.jpg",
+  "images/cat2.jpg",
+  "images/cat3.jpg",
+  "images/cat4.jpg",
+  "images/cat5.jpg",
+  "images/cat6.jpg",
 ];
 
 function shuffle(array) {
   let counter = array.length;
 
-  // While there are elements in the array
   while (counter > 0) {
-    // Pick a random index
     let index = Math.floor(Math.random() * counter);
-
-    // Decrease counter by 1
     counter--;
-
-    // And swap the last element with it
     let temp = array[counter];
     array[counter] = array[index];
     array[index] = temp;
@@ -37,15 +33,12 @@ function shuffle(array) {
   return array;
 }
 
-let shuffledColors = shuffle(COLORS);
+let shuffledColors = shuffle(IMAGES);
 
-// this function loops over the array of colors
-// it creates a new div and gives it a class with the value of the color
-// it also adds an event listener for a click for each card
-function createDivsForColors(colorArray) {
-  for (let color of colorArray) {
+function createDivsForColors(imagesArray) {
+  for (let image of imagesArray) {
     const newDiv = document.createElement("div");
-    newDiv.classList.add(color);
+    newDiv.classList.add(`url(${image})`);
     newDiv.addEventListener("click", handleCardClick);
     gameContainer.append(newDiv);
   }
@@ -56,7 +49,7 @@ function handleCardClick(e) {
   if (e.target.classList.contains("flipped")) return;
 
   let currentCard = e.target;
-  currentCard.style.backgroundColor = currentCard.classList[0];
+  currentCard.style.backgroundImage = currentCard.classList[0];
 
   if (!card1 || !card2) {
     currentCard.classList.add("flipped");
@@ -79,8 +72,8 @@ function handleCardClick(e) {
       noClicking = false;
     } else {
       setTimeout(function () {
-        card1.style.backgroundColor = "";
-        card2.style.backgroundColor = "";
+        card1.style.backgroundImage = "";
+        card2.style.backgroundImage = "";
         card1.classList.remove("flipped");
         card2.classList.remove("flipped");
         card1 = null;
@@ -90,7 +83,21 @@ function handleCardClick(e) {
     }
   }
 
-  if (cardsFlipped === COLORS.length) alert("game over!");
+  if (cardsFlipped === IMAGES.length) alert("GOOD JOB!");
 }
 
 createDivsForColors(shuffledColors);
+
+function getRandomRGB() {
+  let r = Math.floor(Math.random() * 256);
+  let g = Math.floor(Math.random() * 256);
+  let b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+const letters = document.querySelectorAll(".letter");
+
+setInterval(function () {
+  for (let letter of letters) {
+    letter.style.color = getRandomRGB();
+  }
+}, 500);
